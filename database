@@ -1,0 +1,113 @@
+-- Create the login database
+CREATE DATABASE IF NOT EXISTS vtbl_login;
+
+-- Use the newly created login database
+USE vtbl_login;
+
+-- Create the users table without the name column
+CREATE TABLE IF NOT EXISTS login_table (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Insert the specific user with user_name = VTBL and password = vtbl@
+INSERT INTO login_table (user_name, password) VALUES ('VTBL', 'vtbl@2023');
+
+-- Create the auction database
+CREATE DATABASE IF NOT EXISTS vtbl_db;
+
+-- Use the auction database
+USE vtbl_db;
+
+-- Create auction_dates table
+CREATE TABLE IF NOT EXISTS auction_dates (
+    auction_no INT PRIMARY KEY,
+    closing_date DATE,
+    auction_date DATE,
+    prompt_date DATE
+);
+
+-- Insert values into auction_dates
+INSERT INTO auction_dates (auction_no, closing_date, auction_date, prompt_date) VALUES
+(1, '2023-12-22', '2024-01-08', '2024-01-19'),
+(2, '2023-12-29', '2024-01-15', '2024-01-26'),
+(3, '2024-01-05', '2024-01-22', '2024-02-02'),
+(4, '2024-01-12', '2024-01-29', '2024-02-09'),
+(5, '2024-01-19', '2024-02-05', '2024-02-16'),
+(6, '2024-01-26', '2024-02-12', '2024-02-23'),
+(7, '2024-02-02', '2024-02-19', '2024-03-01'),
+(8, '2024-02-09', '2024-02-26', '2024-03-08'),
+(9, '2024-02-16', '2024-03-04', '2024-03-15'),
+(10, '2024-02-23', '2024-03-11', '2024-03-22'),
+(11, '2024-03-01', '2024-03-18', '2024-03-29'),
+(12, '2024-03-08', '2024-03-25', '2024-04-05'),
+(13, '2024-03-15', '2024-04-01', '2024-04-12'),
+(14, '2024-03-22', '2024-04-08', '2024-04-19'),
+(15, '2024-03-29', '2024-04-15', '2024-04-26'),
+(16, '2024-04-05', '2024-04-22', '2024-05-03'),
+(17, '2024-04-12', '2024-04-29', '2024-05-10'),
+(18, '2024-04-19', '2024-05-06', '2024-05-17'),
+(19, '2024-04-26', '2024-05-13', '2024-05-24'),
+(20, '2024-05-03', '2024-05-20', '2024-05-31'),
+(21, '2024-05-10', '2024-05-27', '2024-06-07'),
+(22, '2024-05-17', '2024-06-03', '2024-06-14'),
+(23, '2024-05-24', '2024-06-10', '2024-06-21'),
+(24, '2024-05-31', '2024-06-17', '2024-06-28'),
+(25, '2024-06-07', '2024-06-24', '2024-07-05'),
+(26, '2024-06-14', '2024-07-01', '2024-07-12'),
+(27, '2024-06-21', '2024-07-08', '2024-07-19'),
+(28, '2024-06-28', '2024-07-15', '2024-07-26'),
+(29, '2024-07-05', '2024-07-22', '2024-08-02'),
+(30, '2024-07-12', '2024-07-29', '2024-08-09'),
+(31, '2024-07-19', '2024-08-05', '2024-08-16'),
+(32, '2024-07-26', '2024-08-12', '2024-08-23'),
+(33, '2024-08-02', '2024-08-19', '2024-08-30'),
+(34, '2024-08-09', '2024-08-26', '2024-09-06'),
+(35, '2024-08-16', '2024-09-02', '2024-09-13'),
+(36, '2024-08-23', '2024-09-09', '2024-09-20'),
+(37, '2024-08-30', '2024-09-16', '2024-09-27'),
+(38, '2024-09-06', '2024-09-23', '2024-10-04'),
+(39, '2024-09-13', '2024-09-30', '2024-10-11'),
+(40, '2024-09-20', '2024-10-07', '2024-10-18'),
+(41, '2024-09-27', '2024-10-14', '2024-10-25'),
+(42, '2024-10-04', '2024-10-21', '2024-11-01'),
+(43, '2024-10-11', '2024-10-28', '2024-11-08'),
+(44, '2024-10-18', '2024-11-04', '2024-11-15'),
+(45, '2024-10-25', '2024-11-11', '2024-11-22'),
+(46, '2024-11-01', '2024-11-18', '2024-11-29'),
+(47, '2024-11-08', '2024-11-25', '2024-12-06'),
+(48, '2024-11-15', '2024-12-02', '2024-12-13'),
+(49, '2024-11-22', '2024-12-09', '2024-12-20'),
+(50, '2024-11-29', '2024-12-16', '2024-12-27'),
+(51, '2024-12-06', '2024-12-23', '2025-01-03');
+
+-- Create user_inputs table
+CREATE TABLE IF NOT EXISTS user_inputs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    comments VARCHAR(255),
+    warehouse VARCHAR(50),
+    value VARCHAR(50),
+    mark VARCHAR(50),
+    lot_no INT,
+    grade VARCHAR(50),
+    manf_date DATE,
+    certification VARCHAR(50),
+    invoice VARCHAR(50),
+    no_of_pkgs INT,
+    type VARCHAR(50),
+    net_weight DECIMAL(10, 2),
+    kg DECIMAL(10, 2) AS (no_of_pkgs / NULLIF(net_weight, 0)) STORED,  -- Prevent division by zero
+    nature VARCHAR(50),
+    sale_price DECIMAL(10, 2),
+    buyer_and_packages VARCHAR(255)
+);
+
+-- Create row_limit table
+CREATE TABLE IF NOT EXISTS row_limit (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    main_lot INT,
+    secondary_lot INT,
+    start_lot INT,
+    order_of_sale VARCHAR(255)
+);

@@ -1,0 +1,447 @@
+
+*,*::before,*::after {box-sizing: border-box;}body,h1,h2,h3,h4,p,figure,blockquote,dl,dd {margin: 0;}ul[role='list'],ol[role='list'] {
+    list-style: none;}html:focus-within {scroll-behavior: smooth;}body {min-height: 100vh;text-rendering: optimizeSpeed;line-height: 1.5;}
+    a:not([class]) {text-decoration-skip-ink: auto;}img,picture {max-width: 100%;display: block;}input,button,textarea,select {font: inherit;}
+    @media (prefers-reduced-motion: reduce) {html:focus-within {scroll-behavior: auto; }*,*::before,*::after{
+    animation-duration: 0.01ms !important;animation-iteration-count: 1 !important;transition-duration: 0.01ms !important;scroll-behavior: auto !important;}}
+
+body {
+    background: url('VTBL-logo.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family:century gothic;
+}
+#Page2{
+    display: none;
+/* Modal Content/Box */
+    background-color: #fefefe;
+    margin: 1% auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 0px solid #b68d8d;
+    width: 60%; /* Could be more or less, depending on screen size */
+    padding-bottom: 10px;
+  }
+  /* Add Zoom Animation */
+#Page2 {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+    @-webkit-keyframes animatezoom {
+        from {-webkit-transform: scale(0)} 
+        to {-webkit-transform: scale(1)}
+      }
+        
+      @keyframes animatezoom {
+        from {transform: scale(0)} 
+        to {transform: scale(1)}
+      }
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 300px;
+    color: #e7dfdf;
+    top: 30px;
+    
+ 
+  }
+ 
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+
+ 
+div.loginHeader{
+    text-align: center;
+    margin-bottom: 40px; 
+}
+
+
+div.loginHeader h1{
+   font-size: 40px; 
+   color: green;
+   padding: 0px;
+   margin: 0px;
+  
+}
+div.loginHeader p{
+    color:black;
+    font-size: 30px;
+    margin: 0px;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: bold;
+}
+
+div.loginBody form{
+    margin: 0 auto;
+width: 450px; 
+padding: 30px;
+border: 1px solid #190b0b;
+border-radius:8px ;
+}
+div.loginInputCont{
+    margin-top:5px ;
+
+}
+div.loginBody form:hover{
+    border: 2px dotted green;
+}
+div.loginInputCont label{
+    display: block;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: bold;
+    color:#110909 ;
+
+}
+div.loginInputCont input{
+    height: 30px;
+    width: 100%;
+    border: 2px solid #03d480;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    font-style: italic;
+
+}
+div.loginButtonCont{
+    margin-top: 40px;
+    text-align: center;
+}
+div.loginButtonCont button{
+font-size: 20px;
+padding:10px 40px;
+background-color:gray;
+border: none;
+color: #fff;
+border-radius: 10px;
+}
+div.loginButtonCont button:hover{
+    color: green;
+    background-color: transparent;
+    border: 2px dotted black;
+    font-weight: bolder;
+}
+div.loginButtonCont button:active{
+    background-color: green;
+    color: white;
+    transition:0.7s ;
+}
+
+  
+.containerCancel-Forget {
+    padding: 16px;
+    margin-top: 15px;
+    background-color: transparent;
+  }
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color:gray;
+    border-radius: 10px;
+}
+.cancelbtn:hover{
+    background-color: red;
+
+}
+    
+  span.PswForget {
+    float: right;
+    padding-top: 16px;
+  }
+  @media screen and (max-width: 300px) {
+    span.PswForget {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+  }
+
+
+  /* starting of Homepage*/
+
+div.header{
+    width: 100%;
+    height: 50px;
+}
+
+div.header img{
+    margin-top: 5px;
+    float: left;
+}
+
+div.header a{
+    float: right;
+    margin-top:10px ;
+    padding:10px;
+    border: 1px solid rgb(58, 201, 58);
+    margin-right: 60px;
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(4, 4, 4);
+    border-radius: 15px;
+    text-decoration: none;
+    
+}
+div.header a:hover{
+background-color:white;
+font-weight:bold ;
+text-decoration: underline 2px green;
+
+
+
+}
+div.header a:active{
+background-color: green;
+text-transform: uppercase;
+
+}
+
+div.homepageCont{
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.bannerHeader{
+    text-align: center;
+    margin-bottom: 40px; 
+}
+
+div.bannerHeader h1{
+   font-size: 40px; 
+   color: green;
+   padding: 0px;
+   margin-top: 0px;
+  
+}
+div.bannerHeader p{
+    color:black;
+    font-size: 30px;
+    margin: 0px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+div.bannerIcon{
+   
+    align-items: center;
+    text-align: center;
+
+}
+div.bannerIcon a {
+    font-size: 20px;
+    background-color: transparent;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    padding: 10px 10px;
+    text-decoration: none;
+    color:rgb(13, 22, 13);
+}
+div.bannerIcon a:nth-child(3), :nth-child(4){
+    margin-right: 100px;
+}
+
+div.bannerIcon a:nth-child(2){
+    margin: 0px 100px 0px 100px;
+}
+div.bannerIcon  p{
+    font-size: 15px;
+}
+div.bannerIcon a:hover{
+
+    background-color: aliceblue;
+    font-size: 25px; 
+    color: rgb(14, 12, 12);
+    font-weight: bold;
+}
+div.bannerIcon a:active{
+    background-color: green;
+    color:white;
+}
+
+
+/* Container settings for the iconContents */
+.iconContents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px; /* Padding for the container */
+}
+
+/* Individual styling for each content box */
+#Profile, #Vision, #Mission, #Values, #Services {
+    border: 2px solid #4a90e2; /* Example border color, can vary by section */
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #e8f4fa; /* Example background color */
+    color: #333;
+    font-weight: bold;
+    width: 100%; /* Ensure the content box fills available width */
+    max-width: 500px; /* Max width for each section */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    text-align: center;
+    margin: 5px 0; /* Ensure sections have space around them */
+    display: none;
+}
+
+/* Different background colors for each section */
+#Profile {
+    background-color: #e8f4fa;
+    border-color: #4a90e2;
+}
+
+#Vision {
+    background-color: #e8f4fa;;
+    border-color: #4a90e2;
+}
+
+#Mission {
+    background-color: #e8f4fa;
+    border-color: #4a90e2;
+}
+
+#Values {
+    background-color: #e8f4fa;
+    border-color: #4a90e2;
+}
+
+#Services {
+    background-color: #e8f4fa;
+  border-color: #4a90e2;
+}
+
+/* Optional styling for lists inside #Values and #Services */
+#Values ul, #Services ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+}
+
+#Values ul li, #Services ul li {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Ensure that the iconContents fits and centers */
+.iconContents {
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+
+
+    /*style for  contacts part*/
+        div.ContactsHeader h1{
+            text-align: center;
+            font-size: 40px;
+            color: rgb(10, 13, 10);
+            margin-top:100px;
+           
+        }
+    
+        
+        div.ContactsCont{
+            display: flex;
+            flex-direction: row; 
+            width: 100%;
+          top: 0;
+            float: right;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        div.ContactsCont i {
+            width: 100px;
+            height: auto;
+            margin: 0 0 15px 0;  
+            transform: scale(1.7);
+    
+        }
+
+        div.ContactsCont a{
+    
+                text-align: center;
+                line-height: 24px;
+                min-width: 31%;
+                
+            }
+            
+            div.ContactsCont p {
+                color:green;
+                margin-bottom: 5px;
+              }
+              div.ContactsCont p:hover{
+                color:  blue;
+              }
+
+      /* style of socialnetworks Icons */ 
+      
+   @import url('//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css');
+
+
+   .social-icons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: "Country Gothic", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    padding: 10px 0;
+    background-color:transparent; /* Optional, for a background behind icons */
+  }
+
+.social-icons ul {
+  list-style: none;
+  margin: 0;
+  padding: 0px;
+  background-color: rgb(241, 227, 227);
+
+}
+.social-icons ul li {
+  display: inline-block;
+  zoom: 1;
+  display: inline;
+  vertical-align: middle;
+}
+.social-icons ul li a {
+  display: inline-block;
+  font-size: 1.2em;
+  margin: 0 5px;
+  text-decoration: none;
+}
+.social-icons ul li a{
+  color:rgb(19, 22, 19);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.social-icons ul li a:hover i {
+  color:blue;
+}
+.social-icons ul li a:focus i,
+.social-icons ul li a:active i {
+  transition: none;
+  color: #0b161c;
+}
+
+
+
+        
+   
