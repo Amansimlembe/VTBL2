@@ -69,7 +69,7 @@ INSERT INTO auction_dates (auction_no, closing_date, auction_date, prompt_date) 
 
 CREATE TABLE IF NOT EXISTS user_inputs (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    auction_no INT NOT NULL,
+    auction_no  VARCHAR NOT NULL,
     comments VARCHAR(255),
     warehouse VARCHAR(50) NOT NULL,
     value DECIMAL(10, 2),
@@ -85,5 +85,6 @@ CREATE TABLE IF NOT EXISTS user_inputs (
     nature VARCHAR(50) NOT NULL,
     sale_price DECIMAL(10, 2),
     buyer_packages VARCHAR(255),
+    lot_no  VARCHAR (10, 2),
     UNIQUE (auction_no, invoice) -- Ensures uniqueness for each auction number and lot number combination
 );

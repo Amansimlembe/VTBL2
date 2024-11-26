@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start session to store data
 require 'vendor/autoload.php'; // Include Composer's autoload
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -16,7 +17,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-session_start(); // Start session to store data
+
 
 $allowedMarks = [
     'Chivanjee', 'kibena', 'Itona', 'Ikanga', 'Kiganga', 'Kibwele', 'Lugoda', 
@@ -422,18 +423,15 @@ window.onload = function() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload File</title>
     <style>
-         body {
-        font-family: Arial, sans-serif;
-        padding: 10px;
-    }
+      
 
-    table {
+     #data-table table {
         width: 100%;
         border-collapse: collapse; /* Makes the table borders collapse into one */
         table-layout: fixed; /* Ensures that table columns are evenly distributed */
     }
 
-    th, td {
+      #data-table th,   #data-table td {
         border: 1px solid #ddd;
         text-align: left;
         padding: 8px;
@@ -441,12 +439,12 @@ window.onload = function() {
         word-wrap: break-word; /* Ensures content doesn't overflow */
     }
 
-    th {
+     #data-table th {
         background-color: #f2f2f2;
         font-weight: bold;
     }
 
-    td input {
+     #data-table td input {
         width: 100%; /* Ensures inputs fill the cell */
         padding: 5px;
         font-size: 12px; /* Ensures form inputs also have smaller text */
@@ -456,13 +454,13 @@ window.onload = function() {
 
     /* For responsiveness: Decrease font-size on smaller screens */
     @media (max-width: 768px) {
-        th, td {
+         #data-table th,   #data-table td {
             font-size: 10px; /* Even smaller font size for mobile */
         }
     }
 
     /* Style for form and inputs */
-    form {
+    #upload-form, #data-table form {
         max-width: 1200px;
         margin: 0 auto;
         overflow-x: auto; /* Allow horizontal scroll if needed */
@@ -472,7 +470,7 @@ window.onload = function() {
             margin-top: 20px;
             display: none; /* Initially hidden */
         }
-        .close-btn {
+        .close-btn1 {
             position: absolute;
             top: -10px;
             right: -10px;
@@ -487,21 +485,22 @@ window.onload = function() {
             line-height: 20px;
             text-align: center;
         }
-        .close-btn:hover {
+        .close-btn1:hover {
             background-color: darkred;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h2>Upload an Excel, PDF, or Word File</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <div>
+     <h2>Upload an Excel, PDF, or Word File</h2>
+    <form id="upload-form" action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="uploaded_file" required>
         <button type="submit">Upload</button>
     </form>
 
     <div class="table-container" id="data-table">
-        <button class="close-btn">X</button>
+        <button class="close-btn1">X</button>
         <form action="" method="POST">
             <table>
                 <tr>
@@ -550,11 +549,12 @@ window.onload = function() {
             <?php endif; ?>
 
             // Close table when close button is clicked
-            $(".close-btn").click(function () {
+            $(".close-btn1").click(function () {
                 $(".table-container").hide();
             });
         });
     </script>
+    </div>
 </body>
 </html>
 
