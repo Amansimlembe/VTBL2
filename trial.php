@@ -97,7 +97,7 @@
     </form>
 
     <script>
-       $(document).ready(function () {
+     $(document).ready(function () {
     // Retrieve processed data from localStorage if available
     let processedData = JSON.parse(localStorage.getItem("processedData")) || [];
 
@@ -120,7 +120,7 @@
             contentType: false,
             processData: false,
             beforeSend: function () {
-                $('#alert').html('<p>Uploading and processing file...</p>').show();
+                showAlert('Uploading and processing file...', 'info');
                 $('#dataTable tbody').empty();
                 $('#submit_edit').hide();
             },
@@ -128,27 +128,19 @@
                 try {
                     let data = JSON.parse(response);
                     if (data.status === 'success') {
-                        $('#alert').html('<p style="color: green;">File processed successfully!</p>');
+                        showAlert('File processed successfully!', 'success');
                         processedData = data.data;
                         localStorage.setItem("processedData", JSON.stringify(processedData)); // Store in localStorage
                         populateTable(processedData);
                     } else {
-                        $('#alert').html('<p style="color: red;">' + data.message + '</p>');
+                        showAlert(data.message, 'error');
                     }
                 } catch (error) {
-                    $('#alert').html('<p style="color: red;">Error: Invalid server response.</p>');
+                    showAlert('Error: Invalid server response.', 'error');
                 }
-                // Automatically hide the alert after 5 seconds
-                setTimeout(function() {
-                    $('#alert').fadeOut();
-                }, 5000);
             },
             error: function () {
-                $('#alert').html('<p style="color: red;">Error uploading the file. Please try again.</p>');
-                // Automatically hide the alert after 5 seconds
-                setTimeout(function() {
-                    $('#alert').fadeOut();
-                }, 5000);
+                showAlert('Error uploading the file. Please try again.', 'error');
             }
         });
     });
@@ -182,7 +174,7 @@
 
         // Check if there is any data to submit
         if (processedData.length === 0) {
-            alert('No data to submit. Please upload and process a file first.');
+            showAlert('No data to submit. Please upload and process a file first.', 'error');
             return;
         }
 
@@ -202,15 +194,15 @@
             dataType: 'json',
             success: function (response) {
                 if (response.success && response.success.length > 0) {
-                    alert('Success:\n' + response.success.join('\n'));
+                    showAlert('Success:\n' + response.success.join('\n'), 'success');
                 }
 
                 if (response.errors && response.errors.length > 0) {
-                    alert('Errors:\n' + response.errors.join('\n'));
+                    showAlert('Errors:\n' + response.errors.join('\n'), 'error');
                 }
 
                 if (response.emptyRowFound) {
-                    alert('One or more fields are empty. Please fill all the required fields.');
+                    showAlert('One or more fields are empty. Please fill all the required fields.', 'warning');
                 }
 
                 // After submission, reset the data in localStorage
@@ -220,7 +212,7 @@
                 location.reload();
             },
             error: function (xhr, status, error) {
-                alert('An error occurred: ' + error);
+                showAlert('An error occurred: ' + error, 'error');
             }
         });
     });
@@ -231,6 +223,30 @@
         $('#submit_edit').hide();
         localStorage.removeItem("processedData"); // Remove data from localStorage
     });
+
+    // Show alert function
+    function showAlert(message, type) {
+        let alertBox = $('#alert');
+        alertBox.html('<p>' + message + '</p>').show();
+        // Set alert color based on type
+        switch (type) {
+            case 'success':
+                alertBox.css('color', 'green');
+                break;
+            case 'error':
+                alertBox.css('color', 'red');
+                break;
+            case 'warning':
+                alertBox.css('color', 'orange');
+                break;
+            default:
+                alertBox.css('color', 'blue');
+        }
+        // Automatically hide the alert after 5 seconds
+        setTimeout(function () {
+            alertBox.fadeOut();
+        }, 5000);
+    }
 });
 
     </script>

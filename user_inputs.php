@@ -17,6 +17,22 @@
     <!-- Add FontAwesome CDN -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<!-- DataTables AutoFill CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autoFill/2.5.0/css/autoFill.dataTables.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables AutoFill JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/autoFill/2.5.0/js/dataTables.autoFill.min.js"></script>
+
+
     <style>
        #dataTable {
         width: 100%;
@@ -89,7 +105,7 @@
     border-collapse: collapse;
     margin-top: 20px;
     border: 2px solid black; /* Static outer border */
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 
@@ -104,23 +120,23 @@
 }
 .tbod td {
     padding: 7px;
-    font-size: 0.72em;
+    font-size: 0.7em;
     border: 1px solid #ccc; /* Inner cell borders */
 }
 .thead th {
     padding: 7.5px;
     border: 1px solid black;
-    font-size: 1em;
-    background-color: #f2f2f2;
+    font-size: 0.85em;
+    background-color: transparent;
     font-weight: bold;
 }
 
 /* Additional CSS styling */
 body {
-    font-family: century Gothic;
+    font-family: Arial, Helvetica, sans-serif;
     
-    padding: 20px;
-    background-color: #f4f4f4;
+    padding: 15px;
+    background-color: transparent;
 }
 
 #h1 , #h2  {
@@ -241,11 +257,15 @@ button {
 @media (max-width: 1200px) {
     body {
         margin: 15px;
-        padding: 15px;
+        padding: 10px;
     }
     .thead th, .tbod td {
-        padding: 8px;
+        padding: 5px;
         font-size: 0.9em;
+    }
+    .tbod td {
+        padding: 5px;
+        font-size: 0.7em;
     }
 }
 
@@ -257,6 +277,10 @@ button {
     .thead th, .tbod td {
         padding: 6px;
         font-size: 0.85em;
+    }
+    .tbod td {
+        padding: 5px;
+        font-size: 0.7em;
     }
 }
 
@@ -273,9 +297,12 @@ button {
         padding: 5px;
     }
     #dataTable1, #dataTable2, .thead th, .tbod td  {
-        font-size: 0.75em;
+        font-size: 0.7em;
         padding: 3px;
     }
+
+
+
     .form-group input, .form-group select {
         width: 100%; /* Make form fields full-width on smaller screens */
     }
@@ -290,25 +317,6 @@ button {
 
 
 
-  /* Styling for clean, centered, and autofit tables */
-  .export-table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-bottom: 20px;
-        page-break-after: always;
-    }
-    .export-table th, .export-table td {
-        padding: 8px;
-        text-align: center;
-        border: 1px solid #ddd;
-        word-wrap: break-word;
-        overflow: hidden;
-        white-space: normal; /* Enables auto-fitting content */
-    }
-    .export-table th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
 
 
 
@@ -615,6 +623,13 @@ button {
     font-family: 'Arial', sans-serif; /* Clean font style */
 }
 
+/* Ensure .col16 is centered and bold in the table */
+.col16 {
+    text-align: center;   /* Center the text */
+    font-weight: bold;    /* Make the text bold */
+}
+
+
 
     </style>
 </head>
@@ -861,29 +876,29 @@ button {
         <table id="dataTable1">
         
             <thead class="thead">
-            <tr>
+            <tr class="col16">
                     <th style="text-align: center; color:green; font-weight:bold;" colspan="16">VISION TEA BROKERS LTD</th>
                 </tr>
-                <tr>
+                <tr class="col16">
             <th style="text-align: center;" colspan="16">Main Auction No: <span id="AuctionNos" style="word-spacing: 0.2em; padding-left: 5px;"></span>  of <spans  type="text" id="auctionDates1" style="word-spacing: 0.2em; padding-left: 5px;"> </spans></th>
             </tr>
                 <tr>
-                <th>Comments</th>
-                    <th>Ware Hse</th>
+                <th>Comme <br>nts</th>
+                    <th>Ware<br> Hse</th>
                     <th>Value</th>
                     <th>Mark</th>
                     <th>Lot No</th>
                     <th>Grade</th>
-                    <th>Manf Date</th>
-                    <th>Certification</th>
+                    <th>Manf<br> Date</th>
+                    <th>Certifi <br>cation</th>
                     <th>Invoice</th>
                     <th>Pkgs</th>
                     <th>Type</th>
                     <th>Net</th>
                     <th>Kg</th>
                     <th>Nature</th>
-                    <th>Sale Price</th>
-                    <th> Buyers & Packages</th>
+                    <th>Sale <br>Price</th>
+                    <th> Buyers & <br>Pkgs</th>
                 </tr>
             </thead>
             <tbody class="tbod">
@@ -895,29 +910,29 @@ button {
         <h3 style="color:blue; text-align:center; " id="h4" class="h3">Secondary Catalogue</h3>
         <table id="dataTable2">
             <thead class="thead">
-                <tr>
+                <tr class="col16">
                     <th style="text-align: center; color:green; font-weight:bold;" colspan="16">VISION TEA BROKERS LTD</th>
-                </tr>
+                </tr class="col16">
             <tr>
                     <th style="text-align: center;" colspan="16">Secondary Auction No: <span id="secondaryAuctionNo" style="word-spacing: 0.2em; padding-right: 5px;"></span>  of <span  type="text" id="auctionDates2" style="word-spacing: 0.2em; padding-left: 5px;"> </span></th>
                 </tr>
                 <tr>
-                <th>Comments</th>
-                    <th>Ware Hse</th>
+                <th>Comme <br>nts</th>
+                    <th>Ware<br> Hse</th>
                     <th>Value</th>
                     <th>Mark</th>
                     <th>Lot No</th>
                     <th>Grade</th>
-                    <th>Manf Date</th>
-                    <th>Certification</th>
+                    <th>Manf<br> Date</th>
+                    <th>Certifi <br>cation</th>
                     <th>Invoice</th>
                     <th>Pkgs</th>
                     <th>Type</th>
                     <th>Net</th>
                     <th>Kg</th>
                     <th>Nature</th>
-                    <th>Sale Price</th>
-                    <th> Buyers & Packages</th>
+                    <th>Sale <br>Price</th>
+                    <th> Buyers & <br>Pkgs</th>
                 </tr>
             </thead>
             <tbody class="tbod">
@@ -936,6 +951,14 @@ button {
    
     <script>
       $(document).ready(function() { 
+
+
+        $(window).resize(function () {
+    // Adjust columns for both tables on window resize
+    $('#dataTable1').DataTable().columns.adjust();
+    $('#dataTable2').DataTable().columns.adjust();
+});
+
 
        // Retrieve processed data from localStorage if available
     let processedData = JSON.parse(localStorage.getItem("processedData")) || [];
@@ -1472,6 +1495,8 @@ function wrapWithBorderAndPageBreak(htmlContent) {
 
 // Print button click event with no background colors in tables
 $('button:contains("Print")').click(function() {
+
+    
     var printContents = '';
     
     // Check which tables are visible and add them to print content with page breaks
@@ -1518,217 +1543,336 @@ $('button:contains("Print")').click(function() {
 // Wraps table content with a page-break div
 function wrapWithBorderAndPageBreak(content) {
     return `<div class="page-break">${content}</div>`;
+    
 }
 
 
-// Excel button click event with page breaks between sheets
-$('button:contains("Excel")').click(function() {
-    var wb = XLSX.utils.book_new();
+$('button:contains("Excel")').click(function () {
     var auctionNo = getSelectedAuctionNo() || "Unknown";
 
+    // Initialize the Excel workbook and worksheet
+    var wb = XLSX.utils.book_new();
     wb.Props = {
-        Title: "Catalog Data",
-        Subject: "Catalog Export",
-        Author: "Aman Simlembe"
+        Title: `VTBL CATALOGUE ${auctionNo}`,
+        Author: "VISION TEA BROKERS LTD",
+        CreatedDate: new Date()
     };
 
-    function prepareTableForExcel(tableId) {
-        var table = document.getElementById(tableId);
-        var sheet = XLSX.utils.table_to_sheet(table, { raw: true });
-        
-        // Apply borders and centering
-        var range = XLSX.utils.decode_range(sheet['!ref']);
-        for (var R = range.s.r; R <= range.e.r; ++R) {
-            for (var C = range.s.c; C <= range.e.c; ++C) {
-                var cell_address = XLSX.utils.encode_cell({ r: R, c: C });
-                if (!sheet[cell_address]) continue;
-                sheet[cell_address].s = {
-                    alignment: { horizontal: "center", vertical: "center" },
-                    border: {
-                        top: { style: "thin", color: { auto: 1 } },
-                        bottom: { style: "thin", color: { auto: 1 } },
-                        left: { style: "thin", color: { auto: 1 } },
-                        right: { style: "thin", color: { auto: 1 } }
-                    }
-                };
-            }
+    // Function to apply center alignment to merged cells
+    function applyCenterAlignment(ws) {
+        // Define merge ranges for the first and second rows (A1:P1 and A2:P2)
+        ws["!merges"] = [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 15 } }, // Merge A1:P1
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 15 } }  // Merge A2:P2
+        ];
+
+        // Apply center alignment style to A1 (first merged row)
+        if (ws["A1"]) {
+            ws["A1"].s = {
+                alignment: {
+                    horizontal: "center",
+                    vertical: "center"
+                },
+                font: {
+                    bold: true
+                }
+            };
         }
-        return sheet;
-    }
-    
-    if ($('#cover1').is(':visible')) {
-        var ws1 = prepareTableForExcel('cover1');
-        XLSX.utils.book_append_sheet(wb, ws1, "Coveropage1");
-    }
-    if ($('#cover2').is(':visible')) {
-        var ws1 = prepareTableForExcel('cover2');
-        XLSX.utils.book_append_sheet(wb, ws1, "Coveropage2");
+
+        // Apply center alignment style to A2 (second merged row)
+        if (ws["A2"]) {
+            ws["A2"].s = {
+                alignment: {
+                    horizontal: "center",
+                    vertical: "center"
+                },
+                font: {
+                    bold: false
+                }
+            };
+        }
     }
 
+    // Process DataTable1 if visible
     if ($('#dataTable1').is(':visible')) {
-        var ws1 = prepareTableForExcel('dataTable1');
+        var table1Data = [];
+        $('#dataTable1 tr').each(function () {
+            var rowData = [];
+            $(this).find('th, td').each(function () {
+                rowData.push($(this).text().trim());
+            });
+            table1Data.push(rowData);
+        });
+
+        var ws1 = XLSX.utils.aoa_to_sheet(table1Data);
+
+        // Apply the center alignment to DataTable1
+        applyCenterAlignment(ws1);
+
+        // Auto-size columns based on content starting from row 3
+        var colWidths = [];
+        for (var col = 0; col < 16; col++) { // A to P (16 columns)
+            var maxLength = 0;
+            for (var row = 2; row < table1Data.length; row++) { // Start from row 3 (index 2)
+                if (table1Data[row][col]) {
+                    maxLength = Math.max(maxLength, table1Data[row][col].length);
+                }
+            }
+            colWidths[col] = { wch: maxLength };
+        }
+        ws1["!cols"] = colWidths;
+
         XLSX.utils.book_append_sheet(wb, ws1, "Main Catalogue");
     }
 
+    // Process DataTable2 if visible
     if ($('#dataTable2').is(':visible')) {
-        var ws2 = prepareTableForExcel('dataTable2');
-        XLSX.utils.book_append_sheet(wb, ws2, "Seconadry Catalogue");
+        var table2Data = [];
+        $('#dataTable2 tr').each(function () {
+            var rowData = [];
+            $(this).find('th, td').each(function () {
+                rowData.push($(this).text().trim());
+            });
+            table2Data.push(rowData);
+        });
+
+        var ws2 = XLSX.utils.aoa_to_sheet(table2Data);
+
+        // Apply the center alignment to DataTable2
+        applyCenterAlignment(ws2);
+
+        // Auto-size columns based on content starting from row 3
+        var colWidths2 = [];
+        for (var col = 0; col < 16; col++) { // A to P (16 columns)
+            var maxLength = 0;
+            for (var row = 2; row < table2Data.length; row++) { // Start from row 3 (index 2)
+                if (table2Data[row][col]) {
+                    maxLength = Math.max(maxLength, table2Data[row][col].length);
+                }
+            }
+            colWidths2[col] = { wch: maxLength };
+        }
+        ws2["!cols"] = colWidths2;
+
+        XLSX.utils.book_append_sheet(wb, ws2, "Secondary Catalogue");
     }
 
-    XLSX.writeFile(wb, `VTBL_CATALOGUE_${auctionNo}.xlsx`);
+    // Generate the Excel file and trigger the download
+    var excelFileName = `VTBL_EXCEL_CATALOGUE_${auctionNo}.xlsx`;
+    XLSX.writeFile(wb, excelFileName);
 });
+
+
+
 
 
 
 
 
 // PDF button click event to generate PDF with landscape fit and effective page breaks
-$('button:contains("PDF")').click(function() {
-    var auctionNo = getSelectedAuctionNo() || "Unknown";
+$('button:contains("PDF")').click(function () {
 
-    // Create container div and add tables with page breaks
-    var element = document.createElement('div');
-    if ($('#cover1').is(':visible')) element.innerHTML += wrapWithPageBreak($('#cover1')[0].outerHTML);
-    if ($('#cover2').is(':visible')) element.innerHTML += wrapWithPageBreak($('#cover2')[0].outerHTML);
-    if ($('#dataTable1').is(':visible')) element.innerHTML += wrapWithPageBreak($('#dataTable1')[0].outerHTML);
-    if ($('#dataTable2').is(':visible')) element.innerHTML += wrapWithPageBreak($('#dataTable2')[0].outerHTML);
+$(window).resize(function () {
+    // Adjust columns for both tables on window resize
+    $('#dataTable1').DataTable().columns.adjust();
+    $('#dataTable2').DataTable().columns.adjust();
+});
 
-    // PDF generation options
-    var options = {
-        margin: 0.3, // Small margin to use max page width
-        filename: `VTBL_CATALOGUE_${auctionNo}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, backgroundColor: null }, // High scale for clarity and no background
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-    };
+var auctionNo = getSelectedAuctionNo() || "Unknown";
 
-    // Style settings for precise table fitting and page breaks
-    var style = `
-        <style>
-            /* Basic table styling for clean borders and responsive layout */
-            table, th, td {
-                border: 1px solid #ddd;
-                border-collapse: collapse;
-                padding: 5px;
-                text-align: center;
-                background-color: transparent; /* Ensure table has no background */
-            }
-            th {
-                background-color: transparent;
-            }
-            /* Scale content minimally to fit landscape width */
-            #pdfContentWrapper {
-                width: 100%;
-                max-width: 100%;
-                transform: scale(0.95); /* Slight scaling for full-width fit */
-                transform-origin: top left;
-            }
-            /* Ensure flexible column widths without overflow */
-            table {
-                width: 100%; /* Make table fill the page width */
-                table-layout: auto;
-            }
-            td, th {
-                word-wrap: break-word;
-                overflow: hidden;
-                white-space: normal;
-            }
-            /* Page break styling */
-            .page-break {
-                display: block;
-                page-break-after: always;
-            }
-        </style>
-    `;
+// Create container div for tables with page breaks
+var element = document.createElement('div');
+var hasVisibleContent = false; // Flag to track if any table content is added
 
-    // Wrap content with custom styles
+// Check visibility and add content accordingly
+if ($('#cover1').is(':visible')) {
+    element.innerHTML += wrapWithPageBreak($('#cover1')[0].outerHTML);
+    hasVisibleContent = true;
+}
+if ($('#cover2').is(':visible')) {
+    element.innerHTML += wrapWithPageBreak($('#cover2')[0].outerHTML);  // Include cover2 with placeholders intact
+    hasVisibleContent = true;
+}
+
+// Check visibility of data tables
+var isDataTable1Visible = $('#dataTable1').is(':visible');
+var isDataTable2Visible = $('#dataTable2').is(':visible');
+
+// If both dataTable1 and dataTable2 are visible, break page after dataTable1 only
+if (isDataTable1Visible) {
+    element.innerHTML += $('#dataTable1')[0].outerHTML;
+    hasVisibleContent = true;
+    if (isDataTable2Visible) {
+        // Add page break after dataTable1 if both tables are visible
+        element.innerHTML += wrapWithPageBreak('');
+    }
+}
+
+if (isDataTable2Visible && !isDataTable1Visible) {
+    element.innerHTML += $('#dataTable2')[0].outerHTML;
+    hasVisibleContent = true;
+} else if (isDataTable2Visible && isDataTable1Visible) {
+    element.innerHTML += $('#dataTable2')[0].outerHTML;
+    hasVisibleContent = true;
+}
+
+// If no content is visible, skip PDF generation entirely (avoid creating a blank page)
+if (!hasVisibleContent) {
+    console.log('No visible content to generate PDF.');
+    return; // Skip PDF generation
+}
+
+// PDF generation options
+var options = {
+    margin: 0.3, // Small margin to use max page width
+    filename: `VTBL_CATALOGUE_${auctionNo}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, backgroundColor: null }, // High scale for clarity and no background
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' },
+};
+
+// Style settings for precise table fitting and page breaks
+var style = `
+    <style>
+        #pdfContentWrapper {
+            width: 100%;
+            max-width: 100%;
+            transform: scale(1); /* Slight scaling for full-width fit */
+            transform-origin: top left;
+        }
+
+        .page-break {
+            display: block;
+            page-break-after: always;
+        }
+        /* Ensuring table in cover2 spans a full page in landscape */
+        .landscape-table {
+            page-break-before: always;
+            page-break-after: always;
+            width: 100%;
+            transform: rotate(90deg);
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+`;
+
+// Wrap content with custom styles only if there's content
+if (hasVisibleContent) {
     element.innerHTML = style + `<div id="pdfContentWrapper">${element.innerHTML}</div>`;
 
     // Generate the PDF
     html2pdf().set(options).from(element).save();
+}
 });
 
 // Function to add page breaks between tables
 function wrapWithPageBreak(content) {
-    return `<div class="page-break">${content}</div>`;
+return `<div class="page-break">${content}</div>`;
+
 }
 
-
-
-
-// Word button click event to generate a well-formatted Word document with page breaks, landscape orientation, and font size adjustment
-$('button:contains("Word")').click(function() {
+$('button:contains("Word")').click(function () {
     var auctionNo = getSelectedAuctionNo() || "Unknown";
 
-    // Define the HTML structure for the Word document
+    // Start building the Word document content
     var content = `
         <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
         <head>
             <style>
-                /* Ensure document is in landscape orientation */
-                @page {
-                    size: A4 landscape;
-                    margin: 1in;
-                }
+                /* General styling */
                 body {
                     font-family: Arial, sans-serif;
-                    font-size: 12px; /* Reduced font size for fitting */
-                    color: #000000; /* Ensures no background color */
-                    background: none;
-                }
-                /* Table styling with transparent background, fitting width */
-                table {
-                    width: 100%; /* Ensure table fits within page width */
-                    border-collapse: collapse;
-                    margin: 0 auto;
-                }
-                table, th, td {
-                    border: 1px solid #000; /* Black border for table elements */
-                    padding: 5px; /* Reduced padding to fit content */
+                    font-size: 10px;
+                    line-height: 1.5;
+                    margin: 0;
                     text-align: center;
-                    background: none; /* No background color */
                 }
-                /* Header styling */
-                th {
-                    font-weight: bold;
+
+                @page {
+                    size: A4 portrait;
+                    margin: 1in;
                 }
-                /* Style for page break to start the second table on a new page */
+
                 .page-break {
                     page-break-before: always;
                     display: block;
                     height: 0;
                 }
+
+                /* Common styles for cover1 and cover2 */
+                .cover-border {
+                    border: 2px solid #000; /* Strong outer border */
+                    padding: 20px;
+                    margin: 0 auto;
+                    width: 100%;
+                    box-sizing: border-box;
+                    display: block;
+                }
+
+                /* Cover1 specific styling */
+                .cover1-page {
+                    font-size: 8px;
+                }
+
+                /* Cover2 specific styling */
+                .cover2-page {
+                    font-size: 7px;
+                }
+
+                /* Table styling */
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                table, th, td {
+                    border: 1px solid #000;
+                    padding: 5px;
+                    text-align: center;
+                }
+
+                th {
+                    font-weight: bold;
+                }
+
+                /* Green text for VISION TEA BROKERS */
+                .green-text {
+                    color: green;
+                }
             </style>
         </head>
         <body>`;
- // Append each table, inserting a page break before the second table
- if ($('#cover1').is(':visible')) {
-        content += `<div>${$('#cover1').prop('outerHTML')}</div>`;
-    }
-         // Append each table, inserting a page break before the second table
-    if ($('#cover2').is(':visible')) {
-        content += `<div>${$('#cover2').prop('outerHTML')}</div>`;
-    }
-    // Append each table, inserting a page break before the second table
+
+   
+
+    // Add DataTable1 content
     if ($('#dataTable1').is(':visible')) {
-        content += `<div>${$('#dataTable1').prop('outerHTML')}</div>`;
+        var table1Html = $('#dataTable1').prop('outerHTML');
+        // Apply green color to VISION TEA BROKERS
+        table1Html = table1Html.replace(/VISION TEA BROKERS LTD/g, '<span class="green-text">VISION TEA BROKERS</span>');
+        // Add the table with a page break
+        content += `<div class="table-page page-break">${table1Html}</div>`;
     }
+
+    // Add DataTable2 content
     if ($('#dataTable2').is(':visible')) {
-        content += `<div class="page-break"></div><div>${$('#dataTable2').prop('outerHTML')}</div>`;
+        var table2Html = $('#dataTable2').prop('outerHTML');
+        // Apply green color to VISION TEA BROKERS
+        table2Html = table2Html.replace(/VISION TEA BROKERS LTD/g, '<span class="green-text">VISION TEA BROKERS</span>');
+        // Add the table with a page break
+        content += `<div class="table-page page-break">${table2Html}</div>`;
     }
 
     content += `</body></html>`;
 
-    // Create a Blob with UTF-8 encoding for the Word document
-    var blob = new Blob(['\ufeff', content], {
-        type: 'application/msword'
-    });
-
-    // Download the file as a .doc file
-    saveAs(blob, `VTBL_CATALOGUE_${auctionNo}.doc`);
+    // Create a Blob with the content and trigger download
+    var blob = new Blob([content], { type: 'application/msword' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `Auction_Report_${auctionNo}.doc`;
+    link.click();
 });
-
-
 
 
 

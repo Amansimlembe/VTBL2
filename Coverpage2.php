@@ -1,36 +1,3 @@
-<?php
-include('db_connection.php');
-
-// Initialize auction_no and auction_date
-$auctionNo = '';
-$auctionDate = '';
-
-// Function to normalize auction_no by removing dashes
-function normalizeAuctionNo($auctionNo) {
-    return str_replace('-', '', $auctionNo); // Remove dashes
-}
-
-// Check if auction_no is provided (via POST or GET)
-if (isset($_POST['auction_no']) || isset($_GET['auction_no'])) {
-    $inputAuctionNo = isset($_POST['auction_no']) ? $_POST['auction_no'] : $_GET['auction_no'];
-    $normalizedAuctionNo = normalizeAuctionNo($inputAuctionNo);
-
-    // Fetch auction_no and auction_date using the normalized auction_no
-    $sql = "SELECT auction_no, auction_date FROM auction_dates WHERE REPLACE(auction_no, '-', '') = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $normalizedAuctionNo);
-    $stmt->execute();
-    $stmt->bind_result($auctionNo, $auctionDate);
-    $stmt->fetch();
-    $stmt->close();
-}
-
-// Fetch all available auction numbers for the dropdown
-$dropdown_sql = "SELECT auction_no FROM auction_dates";
-$dropdown_result = $conn->query($dropdown_sql);
-
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,123 +7,90 @@ $conn->close();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         #cover2body {
-       
-       font-family: Century Gothic;
-       margin: 0;
-       padding: 0;
-       box-sizing: border-box;
-   }
+            font-family: Century Gothic;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-   .cover-page2 {
-       text-align: center;
-       margin: 0 auto;
-       border: 1px solid black;
-       padding: 20px;
-       box-sizing: border-box;
-       display: flex;
-       flex-direction: column;
-       justify-content: space-between;
-       margin-bottom: 40px;
-       border: 2px solid #000; ;
-   }
+        .cover-page2 {
+            text-align: center;
+            margin: 0;
+            border: 1px solid black;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 0;
+            border: 2px solid #000; 
+        }
 
-   .cover-page2 .bordered-title {
-       border: 2px solid #000;
-       color: green;
-       font-weight: bolder;
-       margin-bottom: 0px;
-       font-size: 1em; /* Default font size */
-   }
+        .cover-page2 .bordered-title {
+            border: 2px solid #000;
+            color: green;
+            font-weight: bolder;
+            margin-bottom: 0px;
+            font-size: 0.8em; /* Default font size */
+        }
 
-   .cover-page2 .bordered-index {
-       border-bottom: 2px solid black;
-       margin: 0 0 30px 0;
-       padding: 0;
-       font-size: 1.2em; /* Default font size */
-   }
+        .cover-page2 .bordered-index {
+            border-bottom: 2px solid black;
+            margin: 0 0 30px 0;
+            padding: 0;
+            font-size: 1em; /* Default font size */
+        }
 
-   .cover-page2 .table-container2 {
-       margin: 0;
-       padding: 0;
-   }
+        .cover-page2 .table-container2 {
+            margin: 0;
+            padding: 0;
+        }
 
-   .cover-page2 .cover2table {
-       border-collapse: collapse;
-       width: 100%;
-   }
+        .cover-page2 .cover2table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-   .cover-page2 .cover2table th {
-       padding: 5px;
-       text-align: center;
-       font-size: 1em; /* Default font size */
-       border: none;
-   }
+        .cover-page2 .cover2table th {
+            padding: 5px;
+            text-align: center;
+            font-size: 0.9em; /* Default font size */
+            border: none;
+        }
 
-   .cover-page2 .cover2table td {
-       padding: 5px;
-       text-align: center;
-       font-size: 1em; /* Default font size */
-       border: none;
-   }
+        .cover-page2 .cover2table td {
+            padding: 5px;
+            text-align: center;
+            font-size: 0.7em; /* Default font size */
+            border: none;
+        }
 
-   .cover-page2 .cover2table th[colspan="7"] {
-       text-align: left;
-       border-top: 2px solid #000;
-       border-bottom: 2px solid #000;
-   }
+        .cover-page2 .cover2table th[colspan="7"] {
+            text-align: left;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+        }
 
+        /* Responsive Font Sizes and Layout Adjustments */
+        @media (max-width: 768px) {
+            .cover-page2 .cover2table th,
+            .cover-page2 .cover2table td {
+                font-size: 0.9em; /* Smaller font for smaller screens */
+                padding: 8px; /* Adjust padding */
+            }
+        }
 
-   @media print {
-    @page {
-        size: landscape; /* Ensures the page prints in landscape orientation */
-        margin: 1cm; /* Optional: Adjust margins */
-    }
+        @media (max-width: 480px) {
+            .cover-page2 .cover2table th,
+            .cover-page2 .cover2table td {
+                font-size: 0.8em; /* Further reduce font size */
+                padding: 6px; /* Reduce padding for compact layout */
+            }
 
-    body {
-        font-size: 12pt; /* Adjust font size for better readability in print */
-        color: black; /* Ensure text is visible */
-    }
-
-    .cover-page2 {
-        border: none; /* Optional: Remove borders in print */
-        box-shadow: none; /* Remove any box-shadow for a clean print */
-    }
-
-    /* Ensure the table looks good in print */
-    .cover2table th, .cover2table td {
-        border: 1px solid black; /* Add visible borders for printed table */
-        padding: 10px; /* Add spacing for clarity */
-    }
-
-    .cover2table {
-        width: 100%; /* Ensure the table spans the full width of the page */
-    }
-}
-
-   
-
-
-/* Responsive Font Sizes and Layout Adjustments */
-@media (max-width: 768px) {
-    .cover-page2 .cover2table th,
-    .cover-page2 .cover2table td {
-        font-size: 0.9em; /* Smaller font for smaller screens */
-        padding: 8px; /* Adjust padding */
-    }
-}
-
-@media (max-width: 480px) {
-    .cover-page2 .cover2table th,
-    .cover-page2 .cover2table td {
-        font-size: 0.8em; /* Further reduce font size */
-        padding: 6px; /* Reduce padding for compact layout */
-    }
-
-    .cover-page2 .table-container2 {
-        border-width: 0; /* Optional: Hide outer border for compact devices */
-    }
-
-}
+            .cover-page2 .table-container2 {
+                border-width: 0; /* Optional: Hide outer border for compact devices */
+            }
+        }
     </style>
 </head>
 <body>
@@ -187,11 +121,8 @@ $conn->close();
                     </tr>
                 </thead>
                 <tbody id="data-table-body">
-                    <?php if (empty($auctionNo)): ?>
-                        <tr>
-                            <td colspan="7" style="text-align: center; color: red;">No Auction Number Selected</td>
-                        </tr>
-                    <?php endif; ?>
+                    <!-- Placeholder for Auction Data -->
+                    <!-- Data will be injected here via JavaScript -->
                 </tbody>
             </table>
         </div>
@@ -199,8 +130,6 @@ $conn->close();
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
-
 
             const auctionSelect = document.getElementById('auction_no');
             const dataTableBody = document.getElementById('data-table-body');
@@ -220,11 +149,7 @@ $conn->close();
                     fetchAuctionData(auctionNo);
                 } else {
                     localStorage.removeItem('auction_no');
-                    dataTableBody.innerHTML = `
-                        <tr>
-                            <td colspan="7" style="text-align: center; color: red;">No Auction Number Selected</td>
-                        </tr>
-                    `;
+                    dataTableBody.innerHTML = ''; // Clear table if no auction number is selected
                 }
             });
 
@@ -234,9 +159,9 @@ $conn->close();
                     .then(response => response.text())
                     .then(data => {
                         if (data) {
-                            dataTableBody.innerHTML = data;
+                            dataTableBody.innerHTML = data; // Inject the fetched data
                         } else {
-                            dataTableBody.innerHTML = `
+                            dataTableBody.innerHTML = ` 
                                 <tr>
                                     <td colspan="7" style="text-align: center; color: red;">No Data Available</td>
                                 </tr>

@@ -1,4 +1,6 @@
 <?php
+// Start PHP script
+
 // Connect to MySQL database
 $conn = new mysqli("localhost", "root", "", "vtbl_db");
 
@@ -41,22 +43,18 @@ $grade_lot_ranges = [
 ];
 
 // Adjust the query based on dashed or non-dashed auction_no
-if ($is_dashed) {
-    // For dashed auction_no, perform a LIKE search for partial matches
-    $query = "SELECT * FROM user_inputs WHERE auction_no LIKE ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $auction_no);
-} else {
-    // For exact auction_no match
-    $query = "SELECT * FROM user_inputs WHERE auction_no = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $auction_no);
-}
-
+$query = $is_dashed ? "SELECT * FROM user_inputs WHERE auction_no LIKE ?" : "SELECT * FROM user_inputs WHERE auction_no = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $auction_no);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Flag to check if data exists
+$data_exists = false;
+
+// Process rows
 while ($row = $result->fetch_assoc()) {
+    $data_exists = true; // Mark that data exists
     $mark = $row['mark'];
     $grade = $row['grade'];
     $lot_no = $row['lot_no'];
@@ -73,7 +71,7 @@ while ($row = $result->fetch_assoc()) {
 function getCompanyAndWarehouse($mark, $conn, $auction_no) {
     $companies = [
         'MeTL' => ['Arc Mountain', 'Dindira', 'Chivanjee'],
-        'Lipton Teas and Infunsions' => ['Lugoda', 'Kibwere', 'Kilima', 'Kabambe'],
+        'Lipton Teas and Infusions' => ['Lugoda', 'Kibwere', 'Kilima', 'Kabambe'],
         'DL Group Ltd' => ['Itona', 'Kibena', 'Ikanga', 'Luponde', 'Livingstonia'],
         'Wakulima Tea Company Ltd' => ['Katumba', 'Mwakaleli'],
         'East Usambara Tea Company Ltd' => ['Kwamkoro', 'Bulwa'],
@@ -100,45 +98,48 @@ function getCompanyAndWarehouse($mark, $conn, $auction_no) {
     return ['', $warehouse];
 }
 
-// Display data by region
-foreach ($regions as $region => $marks) {
-    echo "<tbody>";
-    echo "<tr><th colspan='7'>$region</th></tr>"; // Region heading
+// Output table rows
+if ($data_exists) {
+    foreach ($regions as $region => $marks) {
+        echo "<tbody>";
+        echo "<tr><th colspan='7'>$region</th></tr>"; // Region heading
 
-    foreach ($marks as $mark) {
-        if (isset($grade_lot_ranges['Brokens'][$mark]) || isset($grade_lot_ranges['Dusts'][$mark]) || isset($grade_lot_ranges['Secondary'][$mark]) || isset($grade_lot_ranges['Orthodox'][$mark])) {
-            // Get lot numbers for each grade type
-            $min_max_lot_numbers = [];
-            foreach ($grade_types as $type => $grades) {
-                if (isset($grade_lot_ranges[$type][$mark])) {
-                    $lot_numbers = $grade_lot_ranges[$type][$mark];
-                    if (count($lot_numbers) === 1) {
-                        $min_max_lot_numbers[$type] = $lot_numbers[0]; // Single lot_no
+        foreach ($marks as $mark) {
+            if (isset($grade_lot_ranges['Brokens'][$mark]) || isset($grade_lot_ranges['Dusts'][$mark]) || isset($grade_lot_ranges['Secondary'][$mark]) || isset($grade_lot_ranges['Orthodox'][$mark])) {
+                // Get lot numbers for each grade type
+                $min_max_lot_numbers = [];
+                foreach ($grade_types as $type => $grades) {
+                    if (isset($grade_lot_ranges[$type][$mark])) {
+                        $lot_numbers = $grade_lot_ranges[$type][$mark];
+                        $min_max_lot_numbers[$type] = count($lot_numbers) === 1
+                            ? $lot_numbers[0] // Single lot_no
+                            : min($lot_numbers) . " - " . max($lot_numbers); // Range
                     } else {
-                        $min_max_lot_numbers[$type] = min($lot_numbers) . " - " . max($lot_numbers); // Range
+                        $min_max_lot_numbers[$type] = '-';
                     }
-                } else {
-                    $min_max_lot_numbers[$type] = '-';
                 }
+
+                // Get company and warehouse
+                list($company, $warehouse) = getCompanyAndWarehouse($mark, $conn, $auction_no);
+
+                // Output the row
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($mark) . "</td>";
+                echo "<td>" . htmlspecialchars($min_max_lot_numbers['Brokens']) . "</td>";
+                echo "<td>" . htmlspecialchars($min_max_lot_numbers['Dusts']) . "</td>";
+                echo "<td>" . htmlspecialchars($min_max_lot_numbers['Secondary']) . "</td>";
+                echo "<td>" . htmlspecialchars($min_max_lot_numbers['Orthodox']) . "</td>";
+                echo "<td>" . htmlspecialchars($company) . "</td>";
+                echo "<td>" . htmlspecialchars($warehouse) . "</td>";
+                echo "</tr>";
             }
-
-            // Get company and warehouse based on mark and auction_no
-            list($company, $warehouse) = getCompanyAndWarehouse($mark, $conn, $auction_no);
-
-            // Output the row
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($mark) . "</td>";
-            echo "<td>" . htmlspecialchars($min_max_lot_numbers['Brokens']) . "</td>";
-            echo "<td>" . htmlspecialchars($min_max_lot_numbers['Dusts']) . "</td>";
-            echo "<td>" . htmlspecialchars($min_max_lot_numbers['Secondary']) . "</td>";
-            echo "<td>" . htmlspecialchars($min_max_lot_numbers['Orthodox']) . "</td>";
-            echo "<td>" . htmlspecialchars($company) . "</td>";
-            echo "<td>" . htmlspecialchars($warehouse) . "</td>"; // Output warehouse instead of estate
-            echo "</tr>";
         }
-    }
 
-    echo "</tbody>";
+        echo "</tbody>";
+    }
+} else {
+    // Display placeholder only if no data exists
+    echo "<tr><td colspan='7' style='text-align: center; color: red;'>No data available for this auction number.</td></tr>";
 }
 
 $conn->close();

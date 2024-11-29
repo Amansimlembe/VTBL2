@@ -5,46 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tea Catalogue Cover Page</title>
     <style>
-    /* Ensure the entire body behaves as a flex container */
+
+        table, #table-container1 {
+            border:none;
+        }
+ /* Ensure the entire body behaves as a flex container */
 #cover1body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%; /* Ensures full height of viewport */
-    margin: 0;
+    height: 100vh; /* Ensure content covers 100% of the page height */
+    margin: 4px;
     padding: 0;
     box-sizing: border-box;
-    
-   
+    border: none;
 }
 
 /* Style the footer to stay at the bottom */
 #footer-adress {
+
+    float: bottom;
     text-align: center;
     background-color: transparent;
-    margin-top: 60px; /* Add more space above the footer */
-    margin-bottom: 5px; /* Add more space below the footer */
-    padding: 12px; /* Optional: Add padding inside the footer */
+    margin-bottom: 3px;
+    padding: 7px;
+    font-size: 0.8em;
+    
 }
 
 /* Cover page styling */
 .cover-page1 {
     margin: 0 auto;
-    padding: 23px; /* Increase padding */
+    padding: 5px; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 30px; /* Add vertical spacing between child elements */
-    border: none; 
+    gap: 7px;
+    border: none;
 }
 
 /* Border styling for divs */
 .bordered-div {
-    border: 2px solid #000; /* Uniform border width */
+    border: 2px solid #000;
     text-align: center;
-    margin-bottom: 40px; /* Adjust spacing between bordered divs */
-    padding: 10px; /* Increase padding inside the div */
-    margin-top: 40px; /* Correct the margin syntax */
+    margin-bottom: 7px;
+    padding: 4px;
+    margin-top: 7px;
 }
 
 /* Logo styling */
@@ -57,38 +63,40 @@
 }
 
 .logo1 img {
-    max-height: 40px;
-   
+    max-height: 20px; 
 }
- /* New style for logo in the top-right corner */
- .logo-right-corner {
-            position: absolute;
-            right: 65px;
-            max-width: 90px;
-            height: auto;
-           
-        }
+
+/* New style for logo in the top-right corner */
+.logo-right-corner {
+    position: absolute;
+    right: 65px;
+    max-width: 80px; 
+    height: auto;
+}
 
 /* Heading styling */
 .cover-page1 h1, .cover-page1 h2 {
     margin: 5px 0;
+    font-size: 1em;
 }
 
 .cover-page1 .h4-custom {
     margin: 3px 0;
+    font-size: 1em;
 }
 
 /* Order of sale styling */
 .order-of-sale {
-    margin: 50px 50px; /* Add vertical spacing above and below the order of sale */
+    margin: 10px 30px;
     text-align: center;
-
-    border: none; /* Ensure no border is applied */
+    border: none;
+    margin-bottom: 20px
 }
 
 .order-of-sale .h1-custom {
     text-decoration: underline;
     text-decoration-thickness: 2px;
+    font-size: 1em;
 }
 
 .contact-info {
@@ -98,22 +106,22 @@
 /* Table styling */
 #cover1table {
     width: 100%;
-    margin-top: 30px; /* Add space above the table */
-    margin-bottom: 30px; /* Add space below the table */
+    margin-top: 8px; 
+    margin-bottom: 2px; 
     border-collapse: collapse;
-
-    border: none; /* Ensure no border is applied */
+    border: none;
 }
 
 #cover1table th, #cover1table td {
-    border: 2px solid #000; /* Unified border width for table cells */
-    padding: 12px;
+    border: 2px solid #000;
+    padding: 8px;
     text-align: center;
+    font-size: 0.7em;
 }
 
 /* Horizontal rule styling */
 hr {
-    margin: 10px 0;
+    margin: 1.5px 0;
     font-weight: bold;
 }
 
@@ -123,8 +131,9 @@ hr {
     border-bottom: 2px dashed black;
     font-weight: bold;
     text-align: center;
-    margin-top: 30px; /* Add space above */
-    margin-bottom: 30px; /* Add space below */
+    margin-top: 5;
+    margin-bottom: 4px;
+    font-size: 10px;
 }
 
 .prompt-date {
@@ -135,25 +144,25 @@ hr {
 .bold-row {
     font-weight: bolder;
     background-color: green;
-    color:white;
+    color: white;
 }
 
 /* Responsive styling */
 @media screen and (max-width: 768px) {
     #cover1table, .outertable {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     #cover1table th, #cover1table td {
-        padding: 3px;
+        padding: 5px;
     }
 
     .cover-page1 h1 {
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
     .logo1 img {
-        max-height: 30px;
+        max-height: 25px;
     }
 
     .bordered-div h1 {
@@ -161,11 +170,11 @@ hr {
     }
 
     .order-of-sale .h1-custom {
-        font-size: 1.2em;
+        font-size: 1em;
     }
 
     .order-of-sale h5 {
-        font-size: 0.7em;
+        font-size: 0.8em;
     }
 }
 
@@ -183,28 +192,32 @@ hr {
     }
 
     #cover1table th, #cover1table td {
-        padding: 2px;
+        padding: 4px;
     }
 
     .logo1 img {
-        max-height: 25px;
+        max-height: 20px;
     }
 
     .order-of-sale h5 {
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 }
 
 /* Logo row table styling */
 .logorow tr {
-    border: 2px solid #000; /* Ensure consistent border width */
+    border: 2px solid #000;
     width: 100%;
     table-layout: fixed;
 }
 
 .logorow th {
     width: auto;
-    padding: 10px;
+    padding: 8px;
+}
+
+.order {
+    font-size: 8px;
 }
 
     </style>
@@ -228,8 +241,8 @@ hr {
                 </th>
             </tr>
             <tr>
-                <th colspan="2" class="table-container1">
-                    <table id="cover1table">
+                <th colspan="2" class="table-container1" style="border:none">
+                    <table id="cover1table" style="border:none">
                         <thead>
                             <tr>
                                 <th>Region</th>
@@ -290,30 +303,36 @@ hr {
             <tr>
                 <th colspan="2" class="order-of-sale">
                     <h1 class="h1-custom">ORDER OF SALE</h1>
-                    <div>
+                    <div style="border:none" class="order">
                         <h5 id="order1" class="clickable">1. VISION TEA BROKERS LTD</h5>
                         <h5 id="order2" class="clickable">2. COHERENT TEA BROKERS LTD</h5>
                     </div>
                 </th>
             </tr>
-            <tr>
+            <tr  style="border:none">
                 <td colspan="2" class="prompt">
-                    PROMPT DATE: <span id="prompt-date" class="prompt-date"></span>
+                    PROMPT DATE: <span  id="prompt-date" class="prompt-date"></span>
                 </td>
             </tr>
-        </table>
 
-        <div style="margin-top:50px; margin-bottom:20px;" id="footer-adress">
+            <tr>
+<th style="border:none">
+            <div style="margin-top:20px; margin-bottom:2px; border: none" id="footer-adress">
             <h1 style="color: green;">REGISTERED ADDRESS</h1>
-            <p>
+            <h5>
                 Head Office, IPS Building 5th & 10th Floor Samora Avenue/Azikiwe Street,<br>
                 P.O. Box 8680, Dar es Salaam, Tanzania.<br>
                 Tel: +255 22 2127537 Mobile: +255754276123, +255714968285<br>
                 Email: info@visionteabrokers.co.tz<br>
-                <a href="http://www.visionteabrokers.co.tz" target="_blank">www.visionteabrokers.co.tz</a>
-            </p>
+               <a href="http://www.visionteabrokers.co.tz" target="_blank">www.visionteabrokers.co.tz</a>
+            </h5>
             <hr>
         </div>
+        </th>
+        </tr>
+        </table>
+
+       
     </section>
     <script>
         // JavaScript code remains the same as provided
