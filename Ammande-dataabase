@@ -89,19 +89,30 @@ CREATE TABLE IF NOT EXISTS user_inputs (
     UNIQUE (auction_no, invoice) -- Ensures uniqueness for each auction number and lot number combination
 );
 
-CREATE TABLE IF NOT EXISTS sales_result (
+CREATE TABLE sales_result ( 
     id INT AUTO_INCREMENT PRIMARY KEY,
-    auction_no  VARCHAR NOT NULL,
+    auction_no VARCHAR NOT NULL,
     date_sold DATE NOT NULL,
-    lot_number VARCHAR(50) NOT NULL,
+    lot_number INT(50) NOT NULL,
     sell_mark VARCHAR(50) NOT NULL,
     invoice VARCHAR(50) NOT NULL UNIQUE,
-    packages  VARCHAR NOT NULL,
-    net_weight  VARCHAR NOT NULL,
+    packages VARCHAR NOT NULL,
+    net_weight VARCHAR NOT NULL,
     grade VARCHAR(10) NOT NULL,
-    price  VARCHAR NOT NULL,
+    price VARCHAR NOT NULL,
+    proceeds DECIMAL(10, 2) AS (CASE 
+        WHEN status = 'sold' THEN (CAST(price AS DECIMAL) * CAST(net_weight AS DECIMAL)) / 100
+        ELSE 0 
+    END) STORED,
     buyer_name VARCHAR(100) NOT NULL,
     warehouse VARCHAR(100) NOT NULL,
     status VARCHAR(50) NOT NULL,
     UNIQUE (auction_no, invoice)
 );
+ALTER TABLE sales_result
+ADD COLUMN proceeds DECIMAL(10, 2) AS (CASE 
+    WHEN status = 'sold' THEN (CAST(price AS DECIMAL) * CAST(net_weight AS DECIMAL)) / 100
+    ELSE 0 
+END) STORED
+AFTER price;
+

@@ -55,7 +55,7 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Sale Result</a></li>
-          <li><a href="#">Auction Sale</a></li>
+          <li id="auction_sale"><a href="#">Auction Sale</a></li>
           <li><a href="#">Private Sale</a></li>
         </ul>
       </li>
@@ -140,6 +140,9 @@
     <div id="dash-div" style="display:none;">
       <?php require 'dashboard.php'; ?>
     </div>
+    <div id="sale_result" style="display:none;">
+      <?php require 'sale_result.php'; ?>
+    </div>
   </section>
 
   <script>
@@ -147,10 +150,12 @@
     // Initialize visibility states from localStorage
     const catalogVisible = localStorage.getItem("catalogVisible") === "true";
     const dashVisible = localStorage.getItem("dashVisible") === "true";
+    const saleVisible = localStorage.getItem("saleVisible") === "true";
 
     // Set initial visibility based on localStorage
     $("#CatalogContainer").toggle(catalogVisible);
     $("#dash-div").toggle(dashVisible);
+    $("#sale_result").toggle(saleVisible);
 
     // Toggle menu on click
     $(".arrow").click(function() {
@@ -161,12 +166,22 @@
         $(".sidebar").toggleClass("close");
     });
 
+     // Show CatalogContainer and hide dash-div on Auction Catalogue click
+     $("#auction_sale").click(function() {
+        $("#dash-div").hide(); // Ensure #dash-div is hidden
+        const isVisible = $("#sale_result").toggle().is(":visible");
+        localStorage.setItem("saleVisible", isVisible); // Update localStorage
+        localStorage.setItem("catalogVisible", false); // Update localStorage
+        localStorage.setItem("dashVisible", false); // Update to ensure #dash-div is hidden
+    });
+
     // Show CatalogContainer and hide dash-div on Auction Catalogue click
     $("#sub-pre-sale1").click(function() {
         $("#dash-div").hide(); // Ensure #dash-div is hidden
         const isVisible = $("#CatalogContainer").toggle().is(":visible");
         localStorage.setItem("catalogVisible", isVisible); // Update localStorage
         localStorage.setItem("dashVisible", false); // Update to ensure #dash-div is hidden
+        localStorage.setItem("saleVisible", false); // Update to ensure #dash-div is hidden
     });
 
     // Show dash-div and hide CatalogContainer on Dashboard click
@@ -175,6 +190,7 @@
         const isVisible = $("#dash-div").toggle().is(":visible");
         localStorage.setItem("dashVisible", isVisible); // Update localStorage
         localStorage.setItem("catalogVisible", false); // Update to ensure #CatalogContainer is hidden
+        localStorage.setItem("saleVisible", false); // Update to ensure #CatalogContainer is hidden
     });
 
     // Hide both sections when a main link is clicked
@@ -185,6 +201,7 @@
         // Update localStorage to reflect both are hidden
         localStorage.setItem("catalogVisible", false);
         localStorage.setItem("dashVisible", false);
+        localStorage.setItem("saleVisible", false);
     });
 });
   </script>
