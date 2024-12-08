@@ -48,6 +48,7 @@ if (isset($_GET['auction_no'])) {
         echo json_encode(null); // No data found for the provided auction_no
     }
 
+    
     $stmt->close();
 } else {
     echo json_encode(['error' => 'No auction number provided']);
