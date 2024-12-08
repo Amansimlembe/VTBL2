@@ -4,13 +4,17 @@ CREATE DATABASE IF NOT EXISTS vtbl_db;
 -- Use the auction database
 USE vtbl_db;
 
--- Create auction_dates table
+-- Modify auction_dates table to use VARCHAR for auction_no
 CREATE TABLE IF NOT EXISTS auction_dates (
-    auction_no INT PRIMARY KEY,
+    auction_no VARCHAR(20) PRIMARY KEY,  -- Changed to VARCHAR to handle "1-24" as distinct
     closing_date DATE,
     auction_date DATE,
-    prompt_date DATE
+    prompt_date DATE,
+    starting_lot VARCHAR(10) NOT NULL,
+    bank_name VARCHAR(255),
+    exchange_rate DECIMAL(10, 2)
 );
+
 
 -- Insert values into auction_dates
 INSERT INTO auction_dates (auction_no, closing_date, auction_date, prompt_date) VALUES
